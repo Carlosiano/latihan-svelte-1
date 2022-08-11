@@ -23,7 +23,9 @@
 </script>
 
 <nav
-	class="w-[99%] absolute bottom-[10px] h-[72px] flex justify-center items-center bg-white rounded-md sm:top-0 sm:w-full sm:rounded-none"
+	class="{css`
+		bottom: ${(mobileMenuWidth * ((100 - 99) / 100)) / 2}px;
+	`} w-[99%] absolute h-[72px] flex justify-center items-center bg-white rounded-md sm:top-0 sm:w-full sm:rounded-none"
 >
 	<ul
 		class="{css`
@@ -51,8 +53,8 @@
 							transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
 						`} absolute font-normal text-black text-[0.75em] tracking-wider transition-transform duration-[0.3s] translate-y-[20px] {mobileMenuNumber ==
 						i
-							? 'text-black translate-y-[10px] sm:text-red-400'
-							: 'text-white'} sm:text-black sm:relative sm:translate-y-0"
+							? 'text-black translate-y-[10px] sm:text-red-400 '
+							: 'text-white sm:text-black '} sm:relative sm:translate-y-0"
 						>{Menu.page == '/'
 							? 'Home'
 							: Menu.page.startsWith('/') && capitalizeFirstLetter(Menu.page.slice(1))}</span
@@ -67,7 +69,7 @@
 	bind:offsetWidth={mobileMenuWidth}
 	class="{css`
 		position: absolute;
-		bottom: 50px;
+		bottom: 45px;
 		width: ${mobileMenuWidthVar}%;
 		margin-left: ${(mobileMenuWidth * ((100 - mobileMenuWidthVar) / 100)) / 2}px;
 		margin-right: ${(mobileMenuWidth * ((100 - mobileMenuWidthVar) / 100)) / 2}px;
@@ -92,7 +94,7 @@
 			&::before {
 				content: '';
 				position: absolute;
-				top: 49%;
+				top: 48%;
 				left: -21.6px;
 				width: 20px;
 				height: 20px;
@@ -103,7 +105,7 @@
 			&::after {
 				content: '';
 				position: absolute;
-				top: 49%;
+				top: 48%;
 				right: -22px;
 				width: 20px;
 				height: 20px;
