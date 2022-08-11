@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '$utils/app.css';
 	import Navbar from '$components/Navbar.svelte';
 </script>
@@ -7,7 +7,7 @@
 	<main class="mb-[130px] sm:mb-0 sm:mt-[80px] sm:order-2">
 		<slot />
 	</main>
-	<header class="flex justify-center fixed bottom-0 w-full sm:order-1 sm:top-0">
+	<header class="flex justify-center fixed bottom-0 w-full sm:relative sm:order-1">
 		<div class="absolute bottom-0 h-[95px] left-0 right-0 bg-slate-600 border-none sm:hidden" />
 		<Navbar />
 	</header>
