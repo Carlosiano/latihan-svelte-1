@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { getJsVariables, capitalizeFirstLetter } from '$utils';
-	import { title } from '$utils/styles';
+	import { capitalizeFirstLetter } from '$utils';
+	import { page } from '$app/stores';
+	// import { title } from '$utils/styles';
 	import * as Icon from 'svelte-mono-icons';
 	import { css } from '@emotion/css';
 	let mobileMenuWidth: number = 0;
@@ -14,24 +15,31 @@
 		{ page: '/photos', icon: Icon.CameraIcon },
 		{ page: '/settings', icon: Icon.SettingsIcon }
 	];
+	navOptions.forEach((item, i) => {
+		if ($page.url.pathname == item.page) {
+			mobileMenuNumber = i;
+		}
+	});
 </script>
 
 <nav
-	class="w-[99%] absolute bottom-[10px] h-[72px] flex justify-center items-center bg-white rounded-md"
+	class="w-[99%] absolute bottom-[10px] h-[72px] flex justify-center items-center bg-white rounded-md sm:top-0 sm:w-full sm:rounded-none"
 >
 	<ul
 		class="{css`
 			width: ${mobileMenuWidthVar}%;
-		`} flex justify-around text-black h-full sm:bg-slate-400 items-center"
+		`} flex justify-around text-black h-full items-center sm:w-full sm:justify-start sm:gap-9 "
 	>
 		{#each navOptions as Menu, i}
-			<li class="{css``} z-[1] relative" on:click={() => (mobileMenuNumber = i)}>
+			<li class="z-[1] relative" on:click={() => (mobileMenuNumber = i)}>
 				<a
 					href={Menu.page}
 					class="relative flex justify-center items-center flex-col w-full text-center"
 				>
 					<span
-						class="transition duration-[0.5s] block leading-[75px] text-center {mobileMenuNumber ==
+						class="{css`
+							transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
+						`} transition-transform duration-[0.3s] block leading-[75px] text-center sm:hidden {mobileMenuNumber ==
 						i
 							? 'translate-y-[-35px]'
 							: ''}"
@@ -39,10 +47,12 @@
 						<Menu.icon size="24" />
 					</span>
 					<span
-						class="absolute font-normal text-black text-[0.75em] tracking-wider transition duration-[0.5s] translate-y-[20px] {mobileMenuNumber ==
+						class="{css`
+							transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
+						`} absolute font-normal text-black text-[0.75em] tracking-wider transition-transform duration-[0.3s] translate-y-[20px] {mobileMenuNumber ==
 						i
-							? 'opacity-1 translate-y-[10px]'
-							: 'opacity-0'}"
+							? 'text-black translate-y-[10px] sm:text-red-400'
+							: 'text-white'} sm:text-black sm:relative sm:translate-y-0"
 						>{Menu.page == '/'
 							? 'Home'
 							: Menu.page.startsWith('/') && capitalizeFirstLetter(Menu.page.slice(1))}</span
@@ -55,7 +65,7 @@
 
 <div
 	bind:offsetWidth={mobileMenuWidth}
-	class={css`
+	class="{css`
 		position: absolute;
 		bottom: 50px;
 		width: ${mobileMenuWidthVar}%;
@@ -63,7 +73,7 @@
 		margin-right: ${(mobileMenuWidth * ((100 - mobileMenuWidthVar) / 100)) / 2}px;
 		height: ${indicatorSize}px;
 		background-color: transparent;
-	`}
+	`} sm:hidden"
 >
 	<div
 		class={css`
@@ -73,7 +83,9 @@
 			height: ${indicatorSize}px;
 			border-radius: 50%;
 			border: 5px solid #475569;
-			transition: transform 0.5s;
+
+			transition: transform 0.3s;
+			transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
 			transform: translateX(
 				${(mobileMenuWidth / 5) * mobileMenuNumber + (mobileMenuWidth / 5 - indicatorSize) / 2}px
 			);
