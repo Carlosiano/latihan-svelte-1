@@ -43,7 +43,7 @@
 							transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
 						`} transition-transform duration-[0.3s] block leading-[75px] text-center sm:hidden {mobileMenuNumber ==
 						i
-							? 'translate-y-[-35px]'
+							? 'translate-y-[-38px]'
 							: ''}"
 					>
 						<Menu.icon size="24" />
@@ -69,10 +69,10 @@
 	bind:offsetWidth={mobileMenuWidth}
 	class="{css`
 		position: absolute;
-		bottom: 45px;
-		width: ${mobileMenuWidthVar}%;
-		margin-left: ${(mobileMenuWidth * ((100 - mobileMenuWidthVar) / 100)) / 2}px;
-		margin-right: ${(mobileMenuWidth * ((100 - mobileMenuWidthVar) / 100)) / 2}px;
+		bottom: 47px;
+		width: ${mobileMenuWidthVar - 1}%;
+		margin-left: ${(mobileMenuWidth * ((99 - mobileMenuWidthVar) / 100)) / 2}px;
+		margin-right: ${(mobileMenuWidth * ((99 - mobileMenuWidthVar) / 100)) / 2}px;
 		height: ${indicatorSize}px;
 		background-color: transparent;
 	`} sm:hidden"
@@ -85,7 +85,6 @@
 			height: ${indicatorSize}px;
 			border-radius: 50%;
 			border: 5px solid #475569;
-
 			transition: transform 0.3s;
 			transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
 			transform: translateX(
