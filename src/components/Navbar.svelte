@@ -1,21 +1,13 @@
 <script lang="ts">
 	import { capitalizeFirstLetter } from '$utils';
 	import { page } from '$app/stores';
+	import {goto} from '$app/navigation';
 	import Icon from '@iconify/svelte';
-	// import { title } from '$utils/styles';
-	// import * as Icon from 'svelte-mono-icons';
 	import { css } from '@emotion/css';
 	let mobileMenuWidth: number = 0;
 	let mobileMenuWidthVar: number = 90;
 	let mobileMenuNumber: number = 0;
 	let indicatorSize: number = 62;
-	// let navOptions = [
-	// 	{ page: '/', icon: Icon.HomeIcon },
-	// 	{ page: '/profile', icon: Icon.UserIcon },
-	// 	{ page: '/message', icon: Icon.MessageIcon },
-	// 	{ page: '/photos', icon: Icon.CameraIcon },
-	// 	{ page: '/settings', icon: Icon.SettingsIcon }
-	// ];
 	let navOptions = [
 		{ page: '/', icon: 'ion:home-outline' },
 		{ page: '/profile',icon: 'ant-design:user-outlined' },
@@ -65,8 +57,8 @@
 			}
 		`}>
 		{#each navOptions as Menu, i}
-			<li class={css`z-index: 1; position: relative;`} on:click={() => (mobileMenuNumber = i)}>
-				<a href={Menu.page} class="{css`position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; `} text-center">
+			<li class={css`z-index: 1; position: relative;`} on:click={() => {mobileMenuNumber = i; goto(Menu.page)}}>
+				<span href={Menu.page} class="{css`position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; `} text-center">
 					<span class="{css`
 							transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
 						`} transition-transform duration-[0.3s] block leading-[75px] text-center sm:hidden {mobileMenuNumber ==
@@ -87,7 +79,7 @@
 							? 'Home'
 							: Menu.page.startsWith('/') && capitalizeFirstLetter(Menu.page.slice(1))}
 					</span>
-				</a>
+				</span>
 			</li>
 		{/each}
 	</ul>
