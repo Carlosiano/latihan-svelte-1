@@ -4,7 +4,7 @@
 </script>
 
 <div class="flex flex-col justify-between w-full">
-	<main class="mb-[130px] sm:mb-0 sm:mt-[80px] sm:order-2">
+	<main class="mb-[130px] sm:order-2">
 		<slot />
 	</main>
 	<header class="flex justify-center fixed bottom-0 w-full sm:relative sm:order-1">

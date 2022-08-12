@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { capitalizeFirstLetter } from '$utils';
 	import { page } from '$app/stores';
-	import {goto} from '$app/navigation';
-	import Icon from '@iconify/svelte';
+	import { goto } from '$app/navigation';
 	import { css } from '@emotion/css';
+	import Icon from '@iconify/svelte';
 	let mobileMenuWidth: number = 0;
 	let mobileMenuWidthVar: number = 90;
 	let mobileMenuNumber: number = 0;
 	let indicatorSize: number = 62;
 	let navOptions = [
 		{ page: '/', icon: 'ion:home-outline' },
-		{ page: '/profile',icon: 'ant-design:user-outlined' },
-		{ page: '/message',icon: 'clarity:camera-line' },
-		{ page: '/photos', icon: 'bi:chat-dots' },
-		{ page: '/settings', icon: 'ep:setting' }
+		{ page: '/aktivitas',icon: 'ep:setting' },
+		{ page: '/pembayaran',icon: 'clarity:camera-line' },
+		{ page: '/kotak-masuk', icon: 'bi:chat-dots' },
+		{ page: '/akun', icon: 'ant-design:user-outlined' }
 	];
 	navOptions.forEach((item, i) => {
 		if ($page.url.pathname == item.page) {
@@ -21,7 +21,6 @@
 		}
 	});
 </script>
-
 
 <!-- navigation container -->
 <nav class={css`
@@ -57,7 +56,7 @@
 			}
 		`}>
 		{#each navOptions as Menu, i}
-			<li class={css`z-index: 1; position: relative;`} on:click={() => {mobileMenuNumber = i; goto(Menu.page)}}>
+			<li class={css`z-index: 1; position: relative;cursor: pointer;`} on:click={() => {mobileMenuNumber = i; goto(Menu.page)}}>
 				<span href={Menu.page} class="{css`position: relative; display: flex; justify-content: center; align-items: center; flex-direction: column; width: 100%; `} text-center">
 					<span class="{css`
 							transition-timing-function: cubic-bezier(0.01, 0.07, 0.13, 1.33);
@@ -76,7 +75,7 @@
 							: 'text-white sm:text-black '} sm:relative sm:translate-y-0">
 
 							{Menu.page == '/'
-							? 'Home'
+							? 'Beranda'
 							: Menu.page.startsWith('/') && capitalizeFirstLetter(Menu.page.slice(1))}
 					</span>
 				</span>
